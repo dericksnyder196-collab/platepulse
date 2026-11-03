@@ -1,0 +1,9 @@
+node_modules/
+package-lock.json
+coverage/
+dist/
+_to_delete/
+.env
+.env.*
+!.env.example
+public/assets/

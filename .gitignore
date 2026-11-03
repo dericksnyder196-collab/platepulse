@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Files moved aside during cleanup, safe to delete
+_to_delete/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

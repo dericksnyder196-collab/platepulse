@@ -1,0 +1,143 @@
+/* public/css/styleguide.css
+ * Layout for the internal /styleguide.html page only.
+ * Colors come from tokens, so the guide always shows the live design.
+ */
+
+.sg-section {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.sg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    gap: var(--space-3);
+}
+
+.sg-swatch {
+    display: grid;
+    align-content: end;
+    gap: var(--space-1);
+    min-height: 5.5rem;
+    padding: var(--space-3);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-control);
+    font-size: var(--text-sm);
+}
+
+.sg-swatch code {
+    font-size: var(--text-xs);
+}
+
+.sg-swatch--page {
+    background: var(--color-page);
+    color: var(--color-text);
+}
+.sg-swatch--surface {
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+.sg-swatch--text {
+    background: var(--color-text);
+    color: var(--color-page);
+}
+.sg-swatch--muted {
+    background: var(--color-text-muted);
+    color: var(--color-surface);
+}
+.sg-swatch--action {
+    background: var(--color-action);
+    color: var(--color-on-action);
+}
+.sg-swatch--action-tint {
+    background: var(--color-action-tint);
+    color: var(--color-on-action-tint);
+}
+.sg-swatch--live {
+    background: var(--color-live);
+    color: var(--color-on-live);
+}
+.sg-swatch--danger {
+    background: var(--color-danger);
+    color: var(--color-on-danger);
+}
+.sg-swatch--danger-tint {
+    background: var(--color-danger-tint);
+    color: var(--color-danger-text);
+}
+
+.sg-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.sg-type-display-3xl {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-display-strong);
+    line-height: var(--leading-tight);
+}
+.sg-type-display-2xl {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-display-strong);
+    line-height: var(--leading-tight);
+}
+.sg-type-display-xl {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-tight);
+}
+
+.sg-space {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+}
+
+.sg-space__bar {
+    height: 0.75rem;
+    background: var(--color-action);
+    border-radius: var(--radius-tag);
+}
+
+.sg-space__bar--1 {
+    width: var(--space-1);
+}
+.sg-space__bar--2 {
+    width: var(--space-2);
+}
+.sg-space__bar--3 {
+    width: var(--space-3);
+}
+.sg-space__bar--4 {
+    width: var(--space-4);
+}
+.sg-space__bar--5 {
+    width: var(--space-5);
+}
+.sg-space__bar--6 {
+    width: var(--space-6);
+}
+.sg-space__bar--7 {
+    width: var(--space-7);
+}
+.sg-space__bar--8 {
+    width: var(--space-8);
+}
+
+.sg-tickets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: var(--space-4);
+}
+
+.sg-note {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+}

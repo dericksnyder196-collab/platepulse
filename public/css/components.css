@@ -1,0 +1,441 @@
+/* public/css/components.css
+ * Reusable components. Uses semantic tokens only: no raw colors, sizes or font names.
+ */
+
+/* ---------- Buttons ---------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: var(--target-size);
+    padding: 0 var(--space-5);
+    border: var(--border-width-control) solid transparent;
+    border-radius: var(--radius-control);
+    background: var(--color-action);
+    color: var(--color-on-action);
+    font-size: var(--text-md);
+    font-weight: var(--weight-bold);
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background-color var(--duration-fast) var(--ease-out),
+        border-color var(--duration-fast) var(--ease-out);
+}
+
+.btn:hover {
+    background: var(--color-action-hover);
+    color: var(--color-on-action);
+}
+
+.btn--secondary {
+    background: var(--color-surface);
+    border-color: var(--color-border-control);
+    color: var(--color-text);
+}
+
+.btn--secondary:hover {
+    background: var(--color-action-tint);
+    color: var(--color-text);
+}
+
+.btn--quiet {
+    padding: 0 var(--space-3);
+    background: transparent;
+    color: var(--color-action);
+}
+
+.btn--quiet:hover {
+    background: var(--color-action-tint);
+    color: var(--color-action-hover);
+}
+
+.btn--danger {
+    background: var(--color-danger);
+}
+
+.btn--danger:hover {
+    background: var(--color-danger-hover);
+}
+
+.btn--block {
+    width: 100%;
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.btn[aria-busy='true'] {
+    cursor: progress;
+}
+
+/* ---------- Form fields ---------- */
+.field {
+    display: grid;
+    gap: var(--space-2);
+}
+
+.field__label {
+    font-weight: var(--weight-bold);
+}
+
+.field__hint {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+}
+
+.field__error {
+    color: var(--color-danger-text);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    min-height: var(--target-size);
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-surface);
+    border: var(--border-width-control) solid var(--color-border-control);
+    border-radius: var(--radius-control);
+}
+
+.textarea {
+    min-height: 6rem;
+    resize: vertical;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+}
+
+.input:focus-visible,
+.select:focus-visible,
+.textarea:focus-visible {
+    outline-offset: 1px;
+}
+
+.input[aria-invalid='true'],
+.select[aria-invalid='true'],
+.textarea[aria-invalid='true'] {
+    border-color: var(--color-danger);
+    box-shadow: inset 0 0 0 1px var(--color-danger);
+}
+
+.input:disabled,
+.select:disabled,
+.textarea:disabled {
+    background: var(--color-page);
+    color: var(--color-text-muted);
+    cursor: not-allowed;
+}
+
+/* ---------- Notices (inline messages) ---------- */
+.notice {
+    padding: var(--space-3) var(--space-4);
+    border: var(--border-width) solid;
+    border-radius: var(--radius-control);
+    font-size: var(--text-sm);
+}
+
+.notice:empty {
+    display: none;
+}
+
+.notice--error {
+    background: var(--color-danger-tint);
+    border-color: var(--color-danger);
+    color: var(--color-danger-text);
+}
+
+.notice--success {
+    background: var(--color-action-tint);
+    border-color: var(--color-action);
+    color: var(--color-on-action-tint);
+}
+
+/* ---------- Panel: one bordered surface, used sparingly (forms) ---------- */
+.panel {
+    padding: var(--space-5);
+    background: var(--color-surface);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-control);
+}
+
+/* ---------- Header ---------- */
+.app-header {
+    background: var(--color-surface);
+    border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.app-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--space-2) var(--space-4);
+}
+
+.wordmark {
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-display-strong);
+    letter-spacing: 0.01em;
+    text-decoration: none;
+}
+
+.wordmark:hover {
+    color: var(--color-text);
+}
+
+/* ---------- Rows in a list ---------- */
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: var(--color-surface);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-control);
+}
+
+.list__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-4);
+}
+
+.list__row + .list__row {
+    border-top: var(--border-width) solid var(--color-border);
+}
+
+.list__title {
+    display: block;
+    font-weight: var(--weight-bold);
+}
+
+.list__meta {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+}
+
+/* ---------- Price list (the menu board) ---------- */
+.price-list {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.price-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+}
+
+.price-row__leader {
+    flex: 1;
+    min-width: var(--space-4);
+    border-bottom: 2px dotted var(--color-text-muted);
+    transform: translateY(-0.2em);
+}
+
+.price-row__price {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--weight-display-strong);
+    white-space: nowrap;
+}
+
+.price-row--sold-out .price-row__name,
+.price-row--sold-out .price-row__price {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+}
+
+/* ---------- Badges ---------- */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-page);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-tag);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--weight-bold);
+}
+
+.badge--live {
+    background: var(--color-live);
+    border-color: transparent;
+    color: var(--color-on-live);
+}
+
+.badge--ok {
+    background: var(--color-action-tint);
+    border-color: transparent;
+    color: var(--color-on-action-tint);
+}
+
+.badge--late {
+    background: var(--color-danger);
+    border-color: transparent;
+    color: var(--color-on-danger);
+}
+
+.badge__pulse {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* The one decorative motion in the product: a new order beats once per second and a half. */
+.badge__pulse--beat {
+    animation: pulse-beat 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-beat {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    40% {
+        transform: scale(1.6);
+        opacity: 0.55;
+    }
+}
+
+/* ---------- Order ticket ---------- */
+.ticket {
+    background: var(--color-surface);
+    border: var(--border-width) solid var(--color-border);
+    border-bottom: 0;
+    border-radius: var(--radius-ticket) var(--radius-ticket) 0 0;
+}
+
+.ticket__body {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-4);
+}
+
+.ticket__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+}
+
+.ticket__number {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-display-strong);
+    line-height: 1;
+}
+
+.ticket__items {
+    display: grid;
+    gap: var(--space-1);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ticket__note {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+}
+
+/* Serrated bottom edge: the shape is a mask, the color still comes from tokens. */
+.ticket::after {
+    content: '';
+    display: block;
+    height: 8px;
+    background: var(--color-surface);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpolygon points='0,0 12,0 6,8'/%3E%3C/svg%3E")
+        repeat-x;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpolygon points='0,0 12,0 6,8'/%3E%3C/svg%3E")
+        repeat-x;
+    -webkit-mask-size: 12px 8px;
+    mask-size: 12px 8px;
+}
+
+/* ---------- Empty state and loading ---------- */
+.empty {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-3);
+    padding: var(--space-6) var(--space-5);
+    background: var(--color-surface);
+    border: var(--border-width) dashed var(--color-border-control);
+    border-radius: var(--radius-control);
+}
+
+.skeleton {
+    display: grid;
+    gap: var(--space-3);
+}
+
+.skeleton__bar {
+    height: 1rem;
+    background: var(--color-border);
+    border-radius: var(--radius-tag);
+}
+
+.skeleton__bar--short {
+    width: 40%;
+}
+
+/* ---------- Toasts ---------- */
+.toast-region {
+    position: fixed;
+    right: var(--space-4);
+    bottom: var(--space-4);
+    left: var(--space-4);
+    z-index: var(--z-toast);
+    display: grid;
+    justify-items: center;
+    gap: var(--space-2);
+    pointer-events: none;
+}
+
+.toast {
+    max-width: 28rem;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-ink-surface);
+    border-radius: var(--radius-control);
+    box-shadow: var(--shadow-overlay);
+    color: var(--color-on-ink-surface);
+    pointer-events: auto;
+    animation: toast-in var(--duration-base) var(--ease-out);
+}
+
+@keyframes toast-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}

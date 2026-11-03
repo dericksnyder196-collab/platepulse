@@ -1,0 +1,34 @@
+/* public/css/style.css
+ * Page layouts. Components live in components.css, values in tokens.css.
+ */
+
+.auth {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: var(--space-5) var(--space-4);
+}
+
+.auth__panel {
+    display: grid;
+    gap: var(--space-5);
+    width: 100%;
+    max-width: 26rem;
+}
+
+.page {
+    width: 100%;
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--space-6) var(--space-4) var(--space-8);
+}
+
+.page > * + * {
+    margin-top: var(--space-6);
+}
+
+.section {
+    display: grid;
+    gap: var(--space-4);
+}

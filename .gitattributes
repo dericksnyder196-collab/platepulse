@@ -1,0 +1,6 @@
+# Keep line endings consistent across Windows and Linux (Render, CI)
+* text=auto eol=lf
+*.woff2 binary
+*.png binary
+*.jpg binary
+*.svg text

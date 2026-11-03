@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Your restaurants | PlatePulse</title>
+        <link rel="stylesheet" href="/css/tokens.css" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <link rel="stylesheet" href="/css/components.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <body data-page="dashboard">
+        <a class="skip-link" href="#main">Skip to main content</a>
+
+        <header class="app-header">
+            <div class="app-header__inner">
+                <a class="wordmark" href="/dashboard.html">PlatePulse</a>
+                <button class="btn btn--quiet" type="button" id="logoutBtn">Log out</button>
+            </div>
+        </header>
+
+        <main class="page" id="main">
+            <h1>Your restaurants</h1>
+
+            <section class="section" aria-labelledby="listHeading">
+                <h2 class="visually-hidden" id="listHeading">Restaurant list</h2>
+                <div id="tenantsContainer" aria-busy="true">
+                    <p class="visually-hidden">Loading your restaurants</p>
+                    <div class="skeleton" aria-hidden="true">
+                        <div class="skeleton__bar"></div>
+                        <div class="skeleton__bar skeleton__bar--short"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" aria-labelledby="addHeading">
+                <h2 id="addHeading">Add a restaurant</h2>
+                <form id="tenantForm" class="panel stack">
+                    <div class="field">
+                        <label class="field__label" for="tenantName">Restaurant name</label>
+                        <input
+                            class="input"
+                            id="tenantName"
+                            name="name"
+                            type="text"
+                            maxlength="100"
+                            autocomplete="organization"
+                            required
+                        />
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="tenantCurrency">Currency (optional)</label>
+                        <input
+                            class="input"
+                            id="tenantCurrency"
+                            name="currency"
+                            type="text"
+                            maxlength="3"
+                            autocapitalize="characters"
+                            spellcheck="false"
+                            aria-describedby="currencyHint"
+                        />
+                        <p class="field__hint" id="currencyHint">
+                            A three-letter code, such as RWF. Leave it empty to use the default.
+                        </p>
+                    </div>
+
+                    <button class="btn" type="submit" id="addBtn">Add restaurant</button>
+                    <div id="formMessage" class="notice notice--error" role="alert"></div>
+                </form>
+            </section>
+        </main>
+
+        <script src="/js/api_client.js"></script>
+        <script src="/js/ui.js"></script>
+        <script src="/js/app.js"></script>
+    </body>
+</html>

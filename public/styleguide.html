@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex" />
+        <title>Style guide | PlatePulse</title>
+        <link rel="stylesheet" href="/css/tokens.css" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <link rel="stylesheet" href="/css/components.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/styleguide.css" />
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Skip to main content</a>
+
+        <header class="app-header">
+            <div class="app-header__inner">
+                <span class="wordmark">PlatePulse style guide</span>
+                <span class="badge">Internal</span>
+            </div>
+        </header>
+
+        <main class="page" id="main">
+            <p class="muted">
+                Every component in every state, drawn from the live tokens in
+                <code>tokens.css</code>. Not served in production. Press Tab to check focus rings.
+            </p>
+
+            <section class="sg-section" aria-labelledby="sg-color">
+                <h2 id="sg-color">Color</h2>
+                <div class="sg-grid">
+                    <div class="sg-swatch sg-swatch--page">
+                        <strong>Page</strong><code>--color-page</code>
+                    </div>
+                    <div class="sg-swatch sg-swatch--surface">
+                        <strong>Surface</strong><code>--color-surface</code>
+                    </div>
+                    <div class="sg-swatch sg-swatch--text">
+                        <strong>Text</strong><code>--color-text</code>
+                    </div>
+                    <div class="sg-swatch sg-swatch--muted">
+                        <strong>Muted text</strong><code>--color-text-muted</code>
+                    </div>
+                    <div class="sg-swatch sg-swatch--action">
+                        <strong>Action</strong><code>--color-action</code>
+                    </div>
+                    <div class="sg-swatch sg-swatch--action-tint">
+                        <strong>Action tint</strong><code>--color-action-tint</code>
+                    </div>
+                    <div class="sg-swatch sg-swatch--live">
+                        <strong>Live</strong><code>--color-live</code>
+                    </div>
+                    <div class="sg-swatch sg-swatch--danger">
+                        <strong>Danger</strong><code>--color-danger</code>
+                    </div>
+                    <div class="sg-swatch sg-swatch--danger-tint">
+                        <strong>Danger tint</strong><code>--color-danger-tint</code>
+                    </div>
+                </div>
+                <p class="sg-note">
+                    Each swatch shows its text on top of it, so contrast problems are visible. Run
+                    an automated contrast check whenever a token changes.
+                </p>
+            </section>
+
+            <section class="sg-section" aria-labelledby="sg-type">
+                <h2 id="sg-type">Type</h2>
+                <p class="sg-type-display-3xl">Order 148 ready</p>
+                <p class="sg-type-display-2xl">Brochettes and grills</p>
+                <p class="sg-type-display-xl">3,500 RWF</p>
+                <p>
+                    Body text in the interface face. Murakaza neza kuri PlatePulse. Où est ma
+                    commande ? Prête à 12 h 30, très chaude, crème brûlée à 4 500 RWF.
+                </p>
+                <p class="muted">
+                    Muted text for hints and metadata. Check that every accent and apostrophe in
+                    Kinyarwanda and French renders in the loaded font, not a fallback.
+                </p>
+            </section>
+
+            <section class="sg-section" aria-labelledby="sg-space">
+                <h2 id="sg-space">Spacing</h2>
+                <div class="sg-space">
+                    <span>space-1</span><span class="sg-space__bar sg-space__bar--1"></span>
+                </div>
+                <div class="sg-space">
+                    <span>space-2</span><span class="sg-space__bar sg-space__bar--2"></span>
+                </div>
+                <div class="sg-space">
+                    <span>space-3</span><span class="sg-space__bar sg-space__bar--3"></span>
+                </div>
+                <div class="sg-space">
+                    <span>space-4</span><span class="sg-space__bar sg-space__bar--4"></span>
+                </div>
+                <div class="sg-space">
+                    <span>space-5</span><span class="sg-space__bar sg-space__bar--5"></span>
+                </div>
+                <div class="sg-space">
+                    <span>space-6</span><span class="sg-space__bar sg-space__bar--6"></span>
+                </div>
+                <div class="sg-space">
+                    <span>space-7</span><span class="sg-space__bar sg-space__bar--7"></span>
+                </div>
+                <div class="sg-space">
+                    <span>space-8</span><span class="sg-space__bar sg-space__bar--8"></span>
+                </div>
+            </section>
+
+            <section class="sg-section" aria-labelledby="sg-buttons">
+                <h2 id="sg-buttons">Buttons</h2>
+                <div class="sg-row">
+                    <button class="btn" type="button">Add restaurant</button>
+                    <button class="btn btn--secondary" type="button">Try again</button>
+                    <button class="btn btn--quiet" type="button">Log out</button>
+                    <button class="btn btn--danger" type="button">Delete menu</button>
+                </div>
+                <div class="sg-row">
+                    <button class="btn" type="button" disabled>Disabled</button>
+                    <button class="btn" type="button" aria-busy="true">Adding…</button>
+                </div>
+                <button class="btn btn--block" type="button">Full width</button>
+                <p class="sg-note">
+                    One primary button per view. Prefer a response over a disabled button where you
+                    can.
+                </p>
+            </section>
+
+            <section class="sg-section" aria-labelledby="sg-fields">
+                <h2 id="sg-fields">Form fields</h2>
+                <form class="panel stack">
+                    <div class="field">
+                        <label class="field__label" for="sg-name">Restaurant name</label>
+                        <input class="input" id="sg-name" type="text" value="Kigali Bistro" />
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="sg-hint">Currency (optional)</label>
+                        <input
+                            class="input"
+                            id="sg-hint"
+                            type="text"
+                            aria-describedby="sg-hint-text"
+                        />
+                        <p class="field__hint" id="sg-hint-text">
+                            A three-letter code, such as RWF.
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="sg-error">Email</label>
+                        <input
+                            class="input"
+                            id="sg-error"
+                            type="email"
+                            value="amina@"
+                            aria-invalid="true"
+                            aria-describedby="sg-error-text"
+                        />
+                        <p class="field__error" id="sg-error-text">
+                            Enter an email address like name@company.com.
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="sg-select">Language</label>
+                        <select class="select" id="sg-select">
+                            <option>Kinyarwanda</option>
+                            <option>Français</option>
+                            <option>English</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="sg-textarea">Notes for the kitchen</label>
+                        <textarea class="textarea" id="sg-textarea"></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="sg-disabled">Disabled field</label>
+                        <input class="input" id="sg-disabled" type="text" value="Locked" disabled />
+                    </div>
+                </form>
+            </section>
+
+            <section class="sg-section" aria-labelledby="sg-notices">
+                <h2 id="sg-notices">Notices</h2>
+                <div class="notice notice--error">That name’s already taken. Try another.</div>
+                <div class="notice notice--success">Your menu is live.</div>
+            </section>
+
+            <section class="sg-section" aria-labelledby="sg-prices">
+                <h2 id="sg-prices">Price list</h2>
+                <ul class="price-list panel">
+                    <li class="price-row">
+                        <span class="price-row__name">Goat brochettes</span
+                        ><span class="price-row__leader" aria-hidden="true"></span
+                        ><span class="price-row__price">3,500</span>
+                    </li>
+                    <li class="price-row">
+                        <span class="price-row__name">Isombe with rice</span
+                        ><span class="price-row__leader" aria-hidden="true"></span
+                        ><span class="price-row__price">4,000</span>
+                    </li>
+                    <li class="price-row">
+                        <span class="price-row__name">Matoke stew</span
+                        ><span class="price-row__leader" aria-hidden="true"></span
+                        ><span class="price-row__price">3,000</span>
+                    </li>
+                    <li class="price-row price-row--sold-out">
+                        <span class="price-row__name">Grilled tilapia</span
+                        ><span class="price-row__leader" aria-hidden="true"></span
+                        ><span class="price-row__price">6,500</span>
+                    </li>
+                </ul>
+                <p class="sg-note">
+                    The last row shows the sold-out state. On the public menu, sold-out items are
+                    hidden.
+                </p>
+            </section>
+
+            <section class="sg-section" aria-labelledby="sg-tickets">
+                <h2 id="sg-tickets">Order tickets</h2>
+                <div class="sg-tickets">
+                    <article class="ticket">
+                        <div class="ticket__body">
+                            <div class="ticket__head">
+                                <span class="ticket__number">Order 148</span>
+                                <span class="badge badge--live"
+                                    ><span
+                                        class="badge__pulse badge__pulse--beat"
+                                        aria-hidden="true"
+                                    ></span
+                                    >New</span
+                                >
+                            </div>
+                            <ul class="ticket__items">
+                                <li>2 × Goat brochettes</li>
+                                <li>1 × Isombe with rice</li>
+                            </ul>
+                            <p class="ticket__note">Delivery. No chili on the isombe.</p>
+                            <button class="btn btn--block" type="button">Accept order</button>
+                        </div>
+                    </article>
+                    <article class="ticket">
+                        <div class="ticket__body">
+                            <div class="ticket__head">
+                                <span class="ticket__number">Order 147</span>
+                                <span class="badge badge--live"
+                                    ><span class="badge__pulse" aria-hidden="true"></span
+                                    >07:42</span
+                                >
+                            </div>
+                            <ul class="ticket__items">
+                                <li>1 × Matoke stew</li>
+                            </ul>
+                            <p class="ticket__note">Pickup.</p>
+                            <button class="btn btn--secondary btn--block" type="button">
+                                Mark ready
+                            </button>
+                        </div>
+                    </article>
+                    <article class="ticket">
+                        <div class="ticket__body">
+                            <div class="ticket__head">
+                                <span class="ticket__number">Order 146</span>
+                                <span class="badge badge--late"
+                                    ><span class="badge__pulse" aria-hidden="true"></span>18:05
+                                    late</span
+                                >
+                            </div>
+                            <ul class="ticket__items">
+                                <li>3 × Goat brochettes</li>
+                            </ul>
+                            <p class="ticket__note">Delivery.</p>
+                            <button class="btn btn--secondary btn--block" type="button">
+                                Mark ready
+                            </button>
+                        </div>
+                    </article>
+                    <article class="ticket">
+                        <div class="ticket__body">
+                            <div class="ticket__head">
+                                <span class="ticket__number">Order 145</span>
+                                <span class="badge badge--ok">Ready</span>
+                            </div>
+                            <ul class="ticket__items">
+                                <li>1 × Grilled tilapia</li>
+                            </ul>
+                            <p class="ticket__note">Waiting for a rider.</p>
+                        </div>
+                    </article>
+                </div>
+                <p class="sg-note">
+                    The timer badge moves from live to late as an order waits. Only a new order
+                    beats.
+                </p>
+            </section>
+
+            <section class="sg-section" aria-labelledby="sg-badges">
+                <h2 id="sg-badges">Badges</h2>
+                <div class="sg-row">
+                    <span class="badge">Draft</span>
+                    <span class="badge badge--live">Live</span>
+                    <span class="badge badge--ok">Published</span>
+                    <span class="badge badge--late">Late</span>
+                </div>
+            </section>
+
+            <section class="sg-section" aria-labelledby="sg-lists">
+                <h2 id="sg-lists">List rows</h2>
+                <ul class="list">
+                    <li class="list__row">
+                        <div>
+                            <span class="list__title">Kigali Bistro</span
+                            ><span class="list__meta">Currency: RWF</span>
+                        </div>
+                    </li>
+                    <li class="list__row">
+                        <div>
+                            <span class="list__title">Nyamirambo Grill</span
+                            ><span class="list__meta">Currency: RWF</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="sg-section" aria-labelledby="sg-empty">
+                <h2 id="sg-empty">Empty state and loading</h2>
+                <div class="empty">
+                    <h3>Add your first restaurant</h3>
+                    <p class="muted">A restaurant holds your menu, orders and staff.</p>
+                    <button class="btn" type="button">Add restaurant</button>
+                </div>
+                <div class="skeleton" aria-hidden="true">
+                    <div class="skeleton__bar"></div>
+                    <div class="skeleton__bar skeleton__bar--short"></div>
+                </div>
+            </section>
+
+            <section class="sg-section" aria-labelledby="sg-toast">
+                <h2 id="sg-toast">Toast</h2>
+                <div class="sg-row">
+                    <button class="btn btn--secondary" type="button" id="toastDemo">
+                        Show a toast
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <script src="/js/ui.js"></script>
+        <script src="/js/styleguide.js"></script>
+    </body>
+</html>
