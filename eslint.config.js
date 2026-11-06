@@ -59,6 +59,24 @@ module.exports = [
         }
     },
 
+    // Scope.PLATFORM reads tenant-owned tables across EVERY restaurant. Only platform (owner)
+    // code may use it, so the rest of the app cannot do it by accident.
+    {
+        files: ['private/**/*.js'],
+        ignores: ['private/platform/**', 'private/core/scope.js'],
+        rules: {
+            'no-restricted-properties': [
+                'error',
+                {
+                    object: 'Scope',
+                    property: 'PLATFORM',
+                    message:
+                        'Scope.PLATFORM is only allowed in private/platform/. Use Scope.tenant(id) or Scope.GLOBAL.'
+                }
+            ]
+        }
+    },
+
     // File paths in these files come from trusted configuration, not from users.
     {
         files: ['scripts/**/*.js', 'private/config/**/*.js'],

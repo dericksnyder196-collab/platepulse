@@ -1,7 +1,7 @@
 # 0005: Four dashboards, role names and the approval policy
 
 Date: 2026-11-03
-Status: Proposed (becomes Accepted when you sign off Step O0)
+Status: Accepted
 
 ## Context
 

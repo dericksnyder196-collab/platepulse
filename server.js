@@ -11,6 +11,7 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 
 const routes = require('./private/routes/index');
+const requestId = require('./private/middleware/requestId');
 const { notFound, errorHandler } = require('./private/middleware/errorHandler');
 
 const app = express();
@@ -39,6 +40,7 @@ if (config.corsOrigins.length > 0) {
 
 // 2. HEALTH CHECK (before logging and rate limiting so Render's frequent pings
 //    are neither logged nor counted against the limit)
+app.use(requestId);
 app.get('/api/health', (req, res) => {
     res.status(200).json({
         status: 'success',

@@ -12,18 +12,19 @@
    Generate a secret with:
    `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`
 3. Copy the self-hosted fonts into the project: `npm run fonts` (needed once; commit the files it creates in `public/assets/fonts`)
-4. Create the tables: `npm run migrate`
+4. Create the tables and load the roles and permissions: `npm run migrate`, then `npm run seed:rbac`
 5. Start the app: `npm start` (or `npm run dev` to restart on file changes)
 6. Check it: open http://localhost:3000/api/health, then http://localhost:3000/styleguide.html
 
 ## Everyday commands
 
-| Command            | What it does                                   |
-| ------------------ | ---------------------------------------------- |
-| `npm run lint`     | Checks the code for errors and unsafe patterns |
-| `npm run lint:fix` | Fixes what can be fixed automatically          |
-| `npm run format`   | Formats all files with Prettier                |
-| `npm run migrate`  | Applies any new files in `db/migrations`       |
+| Command             | What it does                                                                                                                                               |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run lint`      | Checks the code for errors and unsafe patterns                                                                                                             |
+| `npm run lint:fix`  | Fixes what can be fixed automatically                                                                                                                      |
+| `npm run format`    | Formats all files with Prettier                                                                                                                            |
+| `npm run migrate`   | Applies any new files in `db/migrations`                                                                                                                   |
+| `npm run seed:rbac` | Syncs the role and permission catalog into the database (run after every migrate that touches roles, and whenever `private/config/permissions.js` changes) |
 
 ## Troubleshooting
 

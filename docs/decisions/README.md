@@ -29,4 +29,5 @@ What gets easier, what gets harder, what we must revisit and when.
 | 0002 | HS256 access tokens until a second service verifies tokens | Accepted |
 | 0003 | Multi-page frontend with plain ES modules                  | Accepted |
 | 0004 | Design tokens as the single source of the visual identity  | Accepted |
-| 0005 | Four dashboards, role names and the approval policy        | Proposed |
+| 0005 | Four dashboards, role names and the approval policy        | Accepted |
+| 0006 | Explicit database scopes (fail closed)                     | Accepted |
