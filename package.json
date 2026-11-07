@@ -8,6 +8,7 @@
         "start": "node server.js",
         "migrate": "node scripts/migrate.js",
         "seed:rbac": "node scripts/seed-rbac.js",
+        "ship": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/ship.ps1",
         "fonts": "node scripts/copy-fonts.js",
         "dev": "nodemon server.js",
         "lint": "eslint . --max-warnings 0",
