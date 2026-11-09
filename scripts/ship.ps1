@@ -1,7 +1,8 @@
 # scripts/ship.ps1
 #
-# Puts your current work on a new branch and pushes it. Claude then opens the pull request,
-# waits for CI and merges it, so there is nothing to do on GitHub afterwards.
+# Puts your current work on a new branch and pushes it. With the GitHub CLI (gh) installed and
+# logged in, it then opens the pull request, waits for CI and merges it. Without gh, it prints
+# the link to open the pull request.
 #
 # Usage:    npm run ship -- <branch-name> "<commit message>"
 # Example:  npm run ship -- o1a-groundwork "O1a: fail-closed scopes, audit, roles"
@@ -49,4 +50,44 @@ Invoke-Git commit -m $Message
 Invoke-Git push -u origin $Branch
 
 Write-Host ''
-Write-Host "Pushed $Branch. Tell Claude it is pushed; the pull request will be opened, checked and merged for you."
+Write-Host "Pushed $Branch."
+
+# With the GitHub CLI (gh) installed and logged in, finish the job: open the pull request,
+# wait for CI, and merge it. Without it, print the link instead.
+$repoUrl = (git remote get-url origin) -replace '\.git$', ''
+$prUrl = "$repoUrl/pull/new/$Branch"
+
+$ghReady = $false
+if (Get-Command gh -ErrorAction SilentlyContinue) {
+    gh auth status *> $null
+    $ghReady = ($LASTEXITCODE -eq 0)
+}
+
+if (-not $ghReady) {
+    Write-Host ''
+    Write-Host 'GitHub CLI (gh) is not installed or not logged in, so open the pull request here:'
+    Write-Host $prUrl
+    return
+}
+
+$env:GH_PROMPT_DISABLED = '1'
+
+$open = gh pr list --head $Branch --state open --json number --jq 'length'
+if ($open -eq '0') {
+    gh pr create --base main --head $Branch --title $Message --body "Opened by npm run ship."
+    if ($LASTEXITCODE -ne 0) { throw 'gh pr create failed.' }
+}
+
+Write-Host 'Waiting for CI checks...'
+Start-Sleep -Seconds 15
+gh pr checks $Branch --watch --interval 10
+if ($LASTEXITCODE -ne 0) {
+    throw 'CI checks did not pass. Fix the problem, then run the same ship command again.'
+}
+
+gh pr merge $Branch --squash
+if ($LASTEXITCODE -ne 0) { throw 'gh pr merge failed.' }
+
+git push origin --delete $Branch 2>$null
+Write-Host ''
+Write-Host "Merged $Branch into main."
