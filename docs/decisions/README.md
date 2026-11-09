@@ -31,3 +31,4 @@ What gets easier, what gets harder, what we must revisit and when.
 | 0004 | Design tokens as the single source of the visual identity  | Accepted |
 | 0005 | Four dashboards, role names and the approval policy        | Accepted |
 | 0006 | Explicit database scopes (fail closed)                     | Accepted |
+| 0007 | Ship straight to main before launch                        | Accepted |
