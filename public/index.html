@@ -55,6 +55,32 @@
                     <div id="message" class="notice notice--error" role="alert"></div>
                 </form>
 
+                <form id="mfaForm" class="panel stack" hidden>
+                    <div class="field">
+                        <label class="field__label" for="mfaCode">Authentication code</label>
+                        <input
+                            class="input"
+                            id="mfaCode"
+                            name="code"
+                            type="text"
+                            inputmode="text"
+                            autocomplete="one-time-code"
+                            autocapitalize="characters"
+                            spellcheck="false"
+                            maxlength="20"
+                            aria-describedby="mfaHint"
+                            required
+                        />
+                        <p class="field__hint" id="mfaHint">
+                            Enter the 6-digit code from your authenticator app, or one of your
+                            recovery codes.
+                        </p>
+                    </div>
+
+                    <button class="btn btn--block" type="submit" id="mfaSubmit">Verify</button>
+                    <div id="mfaMessage" class="notice notice--error" role="alert"></div>
+                </form>
+
                 <button class="btn btn--quiet btn--block" type="button" id="modeToggle">
                     Create an account
                 </button>

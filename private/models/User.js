@@ -9,6 +9,12 @@ const { Scope } = require('../core/scope');
 const { hashPassword } = require('../utils/hashers');
 
 class User {
+    async findById(id) {
+        const sql = 'SELECT id, uuid, email, default_lang FROM users WHERE id = ?';
+        const rows = await DatabaseController.query(sql, [id], Scope.GLOBAL);
+        return rows[0] || null;
+    }
+
     async findByEmail(email) {
         const sql = 'SELECT * FROM users WHERE email = ?';
         const rows = await DatabaseController.query(sql, [email], Scope.GLOBAL);
@@ -26,6 +32,17 @@ class User {
             Scope.GLOBAL
         );
         return result.insertId;
+    }
+
+    async updatePassword(id, plainTextPassword, connection = null) {
+        const passwordHash = await hashPassword(plainTextPassword);
+        const result = await DatabaseController.query(
+            'UPDATE users SET password_hash = ? WHERE id = ?',
+            [passwordHash, id],
+            Scope.GLOBAL,
+            connection
+        );
+        return result.affectedRows === 1;
     }
 
     async updateProfile(id, updateData) {

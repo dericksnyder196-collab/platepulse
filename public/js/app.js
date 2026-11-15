@@ -69,6 +69,76 @@
             submitBtn.textContent = isBusy ? copy[mode].busy : copy[mode].submit;
         }
 
+        // Second step for accounts that use two-factor authentication.
+        const mfaForm = byId('mfaForm');
+        const mfaCode = byId('mfaCode');
+        const mfaSubmit = byId('mfaSubmit');
+        const mfaMessage = byId('mfaMessage');
+        let mfaTicket = null;
+
+        function finishSignIn(data) {
+            api.setToken(data.accessToken);
+            // The owner area arrives in step O1c. Until then every account lands on the dashboard.
+            window.location.href = '/dashboard.html';
+        }
+
+        function startMfaStep(ticket) {
+            mfaTicket = ticket;
+            form.hidden = true;
+            toggleBtn.hidden = true;
+            mfaForm.hidden = false;
+            title.textContent = 'Two-step verification';
+            document.title = 'Two-step verification | PlatePulse';
+            mfaMessage.textContent = '';
+            mfaCode.value = '';
+            mfaCode.focus();
+        }
+
+        function leaveMfaStep() {
+            mfaTicket = null;
+            mfaForm.hidden = true;
+            form.hidden = false;
+            toggleBtn.hidden = false;
+            passwordInput.value = '';
+            applyMode();
+        }
+
+        mfaForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            mfaMessage.textContent = '';
+            mfaSubmit.disabled = true;
+            mfaSubmit.setAttribute('aria-busy', 'true');
+            mfaSubmit.textContent = 'Verifying…';
+
+            try {
+                const result = await api.request('/api/auth/mfa/verify', {
+                    method: 'POST',
+                    body: { ticket: mfaTicket, code: mfaCode.value },
+                    auth: false
+                });
+
+                if (result.ok && result.data.data && result.data.data.accessToken) {
+                    finishSignIn(result.data.data);
+                    return;
+                }
+
+                // The ticket lasts a few minutes. When it runs out, start again from the password.
+                if (result.status === 401 && /expired/i.test(result.data.message || '')) {
+                    leaveMfaStep();
+                    showMessage(result.data.message);
+                    return;
+                }
+
+                mfaMessage.textContent =
+                    result.data.message || 'We couldn’t verify that code. Try again.';
+                mfaCode.select();
+            } finally {
+                mfaSubmit.disabled = false;
+                mfaSubmit.setAttribute('aria-busy', 'false');
+                mfaSubmit.textContent = 'Verify';
+            }
+        });
+
         toggleBtn.addEventListener('click', () => {
             mode = mode === 'login' ? 'register' : 'login';
             applyMode();
@@ -103,9 +173,10 @@
                     auth: false
                 });
 
-                if (login.ok && login.data.data && login.data.data.accessToken) {
-                    api.setToken(login.data.data.accessToken);
-                    window.location.href = '/dashboard.html';
+                if (login.ok && login.data.data && login.data.data.mfaRequired) {
+                    startMfaStep(login.data.data.ticket);
+                } else if (login.ok && login.data.data && login.data.data.accessToken) {
+                    finishSignIn(login.data.data);
                 } else {
                     showMessage(login.data.message || 'We couldn’t log you in. Try again.');
                 }

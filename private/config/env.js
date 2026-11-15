@@ -124,6 +124,40 @@ function loadJwt() {
     };
 }
 
+/* ---------- multi-factor authentication ---------- */
+
+function loadMfa() {
+    const keyHex = required('MFA_ENCRYPTION_KEY');
+    let encryptionKey;
+
+    if (keyHex !== undefined) {
+        if (/^[0-9a-fA-F]{64}$/.test(keyHex)) {
+            encryptionKey = Buffer.from(keyHex, 'hex');
+        } else {
+            errors.push(
+                'MFA_ENCRYPTION_KEY must be 64 hex characters (32 bytes). See .env.example for the command that generates one.'
+            );
+        }
+    }
+
+    return {
+        encryptionKey,
+        issuer: optional('MFA_ISSUER', 'PlatePulse'),
+        ticketTtlSeconds: integer('MFA_TICKET_TTL_SECONDS', 300),
+        stepUpTtlSeconds: integer('MFA_STEP_UP_TTL_SECONDS', 300),
+        maxFailedAttempts: integer('MFA_MAX_FAILED_ATTEMPTS', 5),
+        lockoutMinutes: integer('MFA_LOCKOUT_MINUTES', 15)
+    };
+}
+
+function loadAuthRateLimit() {
+    return {
+        windowMs: integer('AUTH_RATE_LIMIT_WINDOW_MS', 15 * 60 * 1000),
+        loginMax: integer('LOGIN_RATE_LIMIT_MAX', 10),
+        mfaMax: integer('MFA_RATE_LIMIT_MAX', 20)
+    };
+}
+
 /* ---------- assemble ---------- */
 
 const config = {
@@ -133,6 +167,8 @@ const config = {
 
     db: loadDatabase(),
     jwt: loadJwt(),
+    mfa: loadMfa(),
+    authRateLimit: loadAuthRateLimit(),
 
     // Empty list = same-origin only (the frontend is served by this app, so CORS is not needed).
     corsOrigins: list('CORS_ORIGINS'),

@@ -14,8 +14,16 @@ const requireAuth = (req, res, next) => {
     const token = authHeader.split(' ')[1];
 
     try {
+        // Only genuine access tokens pass: sign-in tickets and step-up passes have other audiences.
         const decoded = verifyAccessToken(token);
-        req.user = { id: decoded.id, uuid: decoded.uuid, email: decoded.email };
+        req.user = {
+            id: decoded.id,
+            uuid: decoded.uuid,
+            email: decoded.email,
+            scope: decoded.scope || 'user',
+            roles: Array.isArray(decoded.roles) ? decoded.roles : [],
+            mfa: Array.isArray(decoded.amr) && decoded.amr.includes('otp')
+        };
         next();
     } catch (error) {
         // 401 (not 403) so clients know to send the user back to the login page.

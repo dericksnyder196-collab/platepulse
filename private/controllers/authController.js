@@ -2,8 +2,11 @@
 
 const config = require('../config/env');
 const User = require('../models/User');
+const PlatformRole = require('../models/PlatformRole');
+const UserMfa = require('../models/UserMfa');
 const { verifyPassword, burnVerificationTime } = require('../utils/hashers');
-const { signAccessToken } = require('../utils/jwtHelper');
+const { signMfaTicket } = require('../utils/jwtHelper');
+const { issueAccessToken } = require('../services/SessionService');
 const {
     validateEmail,
     validateNewPassword,
@@ -72,12 +75,35 @@ class AuthController {
             return res.status(401).json({ status: 'error', message: 'Invalid credentials.' });
         }
 
-        const accessToken = signAccessToken({ id: user.id, uuid: user.uuid, email: user.email });
+        const roles = await PlatformRole.forUser(user.id);
+        const mfa = await UserMfa.findByUserId(user.id);
+        const mfaActive = Boolean(mfa) && mfa.status === 'active';
+
+        // Platform accounts must use two-factor authentication. Without it they cannot sign in.
+        if (roles.length > 0 && !mfaActive) {
+            return res.status(403).json({
+                status: 'error',
+                message:
+                    'This account must set up two-factor authentication before it can sign in. Contact the platform owner.'
+            });
+        }
+
+        // A correct password is not enough when two-factor is on: return a short-lived ticket that
+        // can only be exchanged for a session together with a valid code.
+        if (mfaActive) {
+            return res.status(200).json({
+                status: 'success',
+                data: { mfaRequired: true, ticket: signMfaTicket(user.id) }
+            });
+        }
+
+        const { accessToken, scope } = issueAccessToken(user, roles, ['pwd']);
 
         res.status(200).json({
             status: 'success',
             data: {
                 accessToken,
+                scope,
                 user: { uuid: user.uuid, email: user.email }
             }
         });
