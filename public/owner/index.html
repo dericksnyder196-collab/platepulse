@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow" />
+        <title>Owner | PlatePulse</title>
+        <link rel="stylesheet" href="/css/tokens.css" />
+        <link rel="stylesheet" href="/css/fonts.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <link rel="stylesheet" href="/css/components.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <body data-page="owner">
+        <a class="skip-link" href="#main">Skip to main content</a>
+
+        <header class="app-header">
+            <div class="app-header__inner">
+                <span class="wordmark">PlatePulse Owner</span>
+                <button class="btn btn--quiet" type="button" id="signOutBtn" hidden>
+                    Sign out
+                </button>
+            </div>
+        </header>
+
+        <main class="page" id="main">
+            <!-- Step 1: password -->
+            <section id="signInView" class="stack">
+                <h1>Owner sign-in</h1>
+                <form id="signInForm" class="panel stack">
+                    <div class="field">
+                        <label class="field__label" for="ownerEmail">Email</label>
+                        <input
+                            class="input"
+                            id="ownerEmail"
+                            name="email"
+                            type="email"
+                            autocomplete="username"
+                            required
+                        />
+                    </div>
+                    <div class="field">
+                        <label class="field__label" for="ownerPassword">Password</label>
+                        <input
+                            class="input"
+                            id="ownerPassword"
+                            name="password"
+                            type="password"
+                            autocomplete="current-password"
+                            required
+                        />
+                    </div>
+                    <button class="btn btn--block" type="submit" id="signInBtn">Continue</button>
+                    <div id="signInMessage" class="notice notice--error" role="alert"></div>
+                </form>
+                <p class="muted">
+                    This session lives only in this tab. Closing or reloading the tab signs you out.
+                </p>
+            </section>
+
+            <!-- Step 2: one-time code -->
+            <section id="codeView" class="stack" hidden>
+                <h1>Two-step verification</h1>
+                <form id="codeForm" class="panel stack">
+                    <div class="field">
+                        <label class="field__label" for="ownerCode">Authentication code</label>
+                        <input
+                            class="input"
+                            id="ownerCode"
+                            name="code"
+                            type="text"
+                            inputmode="text"
+                            autocomplete="one-time-code"
+                            autocapitalize="characters"
+                            spellcheck="false"
+                            maxlength="20"
+                            aria-describedby="ownerCodeHint"
+                            required
+                        />
+                        <p class="field__hint" id="ownerCodeHint">
+                            Enter the 6-digit code from your authenticator app, or a recovery code.
+                        </p>
+                    </div>
+                    <button class="btn btn--block" type="submit" id="codeBtn">Verify</button>
+                    <div id="codeMessage" class="notice notice--error" role="alert"></div>
+                </form>
+                <button class="btn btn--quiet" type="button" id="codeBackBtn">Start over</button>
+            </section>
+
+            <!-- Signed in -->
+            <section id="appView" class="stack" hidden>
+                <h1>Signed in</h1>
+                <div id="appNotice" class="notice notice--success" role="status"></div>
+
+                <dl class="kv panel">
+                    <div class="kv__row">
+                        <dt>Account</dt>
+                        <dd id="infoEmail"></dd>
+                    </div>
+                    <div class="kv__row">
+                        <dt>Role</dt>
+                        <dd id="infoRoles"></dd>
+                    </div>
+                    <div class="kv__row">
+                        <dt>Permissions</dt>
+                        <dd id="infoPermissions"></dd>
+                    </div>
+                    <div class="kv__row">
+                        <dt>Session ends in</dt>
+                        <dd id="infoCountdown"></dd>
+                    </div>
+                </dl>
+
+                <p class="muted">
+                    The session renews while you work and ends after
+                    <span id="infoIdle"></span> minutes without activity, or
+                    <span id="infoAbsolute"></span> hours in total.
+                </p>
+
+                <h2>Security check</h2>
+                <p class="muted">
+                    High-impact actions ask for a fresh code. Try it: wait for the code in your app
+                    to change, then enter the new one.
+                </p>
+                <form id="stepUpForm" class="panel stack">
+                    <div class="field">
+                        <label class="field__label" for="stepUpCode"
+                            >Fresh authentication code</label
+                        >
+                        <input
+                            class="input"
+                            id="stepUpCode"
+                            name="code"
+                            type="text"
+                            inputmode="numeric"
+                            autocomplete="one-time-code"
+                            maxlength="20"
+                            required
+                        />
+                    </div>
+                    <button class="btn btn--secondary" type="submit" id="stepUpBtn">
+                        Test step-up
+                    </button>
+                    <div id="stepUpMessage" class="notice notice--error" role="alert"></div>
+                </form>
+
+                <p class="muted">
+                    Restaurants, orders, money and the rest of the owner tools are built step by
+                    step from here.
+                </p>
+            </section>
+        </main>
+
+        <script src="/owner/owner.js"></script>
+    </body>
+</html>

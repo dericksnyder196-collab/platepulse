@@ -85,7 +85,7 @@ module.exports = [
 
     // Browser code: no unsafe HTML sinks. Use textContent or createElement.
     {
-        files: ['public/js/**/*.js'],
+        files: ['public/js/**/*.js', 'public/owner/**/*.js'],
         languageOptions: {
             sourceType: 'script',
             globals: { ...globals.browser }

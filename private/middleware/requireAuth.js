@@ -22,7 +22,9 @@ const requireAuth = (req, res, next) => {
             email: decoded.email,
             scope: decoded.scope || 'user',
             roles: Array.isArray(decoded.roles) ? decoded.roles : [],
-            mfa: Array.isArray(decoded.amr) && decoded.amr.includes('otp')
+            mfa: Array.isArray(decoded.amr) && decoded.amr.includes('otp'),
+            authTime: decoded.auth_time || null,
+            expiresAt: decoded.exp
         };
         next();
     } catch (error) {

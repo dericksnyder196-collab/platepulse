@@ -39,8 +39,8 @@ function verify(token, audience) {
     });
 }
 
-function signAccessToken(payload) {
-    return sign(payload, AUDIENCE.ACCESS, config.jwt.accessExpiresIn);
+function signAccessToken(payload, expiresIn = config.jwt.accessExpiresIn) {
+    return sign(payload, AUDIENCE.ACCESS, expiresIn);
 }
 
 function verifyAccessToken(token) {

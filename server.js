@@ -12,6 +12,7 @@ const rateLimit = require('express-rate-limit');
 
 const routes = require('./private/routes/index');
 const requestId = require('./private/middleware/requestId');
+const { ownerNetworkGuard, ownerHeaders } = require('./private/middleware/ownerGuards');
 const { notFound, errorHandler } = require('./private/middleware/errorHandler');
 
 const app = express();
@@ -65,17 +66,20 @@ app.use('/api', globalLimiter);
 app.use(express.json({ limit: config.bodyLimit }));
 app.use(express.urlencoded({ extended: true, limit: config.bodyLimit }));
 
-// 5. FRONTEND STATIC FILES (absolute path, so it works regardless of the working directory)
+// 5. OWNER AREA: optional IP allowlist, and stricter headers than the rest of the site
+app.use(['/owner', '/api/v1/owner'], ownerNetworkGuard, ownerHeaders);
+
+// 6. FRONTEND STATIC FILES (absolute path, so it works regardless of the working directory)
 // The internal style guide is for development only.
 if (config.isProduction) {
     app.get('/styleguide.html', (req, res) => res.sendStatus(404));
 }
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 6. BACKEND ROUTES
+// 7. BACKEND ROUTES
 app.use('/api', routes);
 
-// 7. ERROR HANDLING (must come last)
+// 8. ERROR HANDLING (must come last)
 app.use('/api', notFound);
 app.use(errorHandler);
 

@@ -439,3 +439,40 @@
         transform: none;
     }
 }
+
+/* ---------- Key-value list (facts about one thing) ---------- */
+.kv {
+    display: grid;
+    margin: 0;
+}
+
+.kv__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+}
+
+.kv__row + .kv__row {
+    border-top: var(--border-width) solid var(--color-border);
+}
+
+.kv__row:first-child {
+    padding-top: 0;
+}
+
+.kv__row:last-child {
+    padding-bottom: 0;
+}
+
+.kv dt {
+    color: var(--color-text-muted);
+}
+
+.kv dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--weight-bold);
+    text-align: right;
+}

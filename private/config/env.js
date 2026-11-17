@@ -158,6 +158,19 @@ function loadAuthRateLimit() {
     };
 }
 
+/* ---------- owner area ---------- */
+
+function loadOwner() {
+    return {
+        // Signing out after this long without activity. The owner page renews the session while you work.
+        sessionIdleMinutes: integer('OWNER_SESSION_IDLE_MINUTES', 30),
+        // Hard stop, however active you are.
+        sessionAbsoluteHours: integer('OWNER_SESSION_ABSOLUTE_HOURS', 8),
+        // Optional: when set, the owner pages and API answer only to these IP addresses.
+        allowedIps: list('OWNER_ALLOWED_IPS')
+    };
+}
+
 /* ---------- assemble ---------- */
 
 const config = {
@@ -169,6 +182,7 @@ const config = {
     jwt: loadJwt(),
     mfa: loadMfa(),
     authRateLimit: loadAuthRateLimit(),
+    owner: loadOwner(),
 
     // Empty list = same-origin only (the frontend is served by this app, so CORS is not needed).
     corsOrigins: list('CORS_ORIGINS'),

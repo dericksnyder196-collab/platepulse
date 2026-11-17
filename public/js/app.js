@@ -77,8 +77,13 @@
         let mfaTicket = null;
 
         function finishSignIn(data) {
+            if (data.scope === 'platform') {
+                // Owner sessions live only in memory on the owner page, never in browser storage.
+                leaveMfaStep();
+                showMessage('Owner accounts sign in on the owner page: /owner/');
+                return;
+            }
             api.setToken(data.accessToken);
-            // The owner area arrives in step O1c. Until then every account lands on the dashboard.
             window.location.href = '/dashboard.html';
         }
 
