@@ -11,6 +11,24 @@
 4. Start the app (`npm start`), and in a second terminal run `npm run owner:check` to prove sign-in
    works.
 
+## Signing in every day
+
+Open `/owner/` (for example `http://localhost:3000/owner/`), enter your email and password, then the
+code from your authenticator app. The session lives in that browser tab only: reloading or closing
+the tab signs you out. It lasts 30 minutes, renews while you work, and ends after 8 hours at the
+latest. If you sign in on the normal login page instead, it points you to `/owner/`.
+
+An owner account cannot be used for restaurants or ordering. Use a separate account to test those.
+
+To limit the owner area to certain networks, set `OWNER_ALLOWED_IPS` (comma-separated). Other
+addresses get a plain 404.
+
+## Checking the access rules
+
+- `npm run check:crypto` (one-time-code math and encryption, offline)
+- `npm run check:access` (permission catalog and guards, offline)
+- `npm run owner:check` (the whole owner sign-in against the running app)
+
 ## Forgot the password
 
 There is no web "forgot password" screen yet. From your terminal, set a new one:

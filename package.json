@@ -13,6 +13,7 @@
         "password:set": "node scripts/set-password.js",
         "owner:check": "node scripts/owner-login-check.js",
         "check:crypto": "node scripts/check-crypto.js",
+        "check:access": "node scripts/check-access.js",
         "ship": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/ship.ps1",
         "fonts": "node scripts/copy-fonts.js",
         "dev": "nodemon server.js",

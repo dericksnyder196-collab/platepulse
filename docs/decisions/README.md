@@ -33,3 +33,4 @@ What gets easier, what gets harder, what we must revisit and when.
 | 0006 | Explicit database scopes (fail closed)                     | Accepted |
 | 0007 | Ship straight to main before launch                        | Accepted |
 | 0008 | Two-factor authentication design                           | Accepted |
+| 0009 | Owner area isolation and session rules                     | Accepted |
